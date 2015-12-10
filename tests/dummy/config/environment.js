@@ -16,6 +16,19 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      nptTransition: {
+        transitionOptions: {
+          "direction"        : "left",
+            "duration"         :  400,
+            "slowdownfactor"   :    1,
+            "iosdelay"         :  -1,
+            "androiddelay"     :  -1,
+            "winphonedelay"    :  -1,
+            "fixedPixelsTop"   :    0,
+            "fixedPixelsBottom":   0 
+        },
+        transitionType: "slide"
+      }
     }
   };
 
