@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'dummy',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    defaultLocationType: 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -16,7 +16,18 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      nptTransition: {
+      
+    },
+    cordova: {
+      emberUrl: "http://192.168.1.15:4200",
+      rebuildOnChange: false,
+      emulate: false,
+      liveReload: {
+        enabled: true,
+        platform: "android"
+      }
+    },
+    nptTransition: {
         transitionOptions: {
           "direction"        : "left",
             "duration"         :  400,
@@ -29,7 +40,6 @@ module.exports = function(environment) {
         },
         transitionType: "slide"
       }
-    }
   };
 
   if (environment === 'development') {
