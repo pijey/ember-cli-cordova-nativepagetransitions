@@ -4,6 +4,7 @@ export function initialize(container){
     Ember.run.next(function(){
         var applicationRoute = container.lookup('route:application');
         if (applicationRoute && typeof applicationRoute.reopen === 'function'){
+            //Add "back" action to the application route
             applicationRoute.reopen({
                 actions: {
                     back: function(transitionType, transitionOptions){
@@ -16,6 +17,6 @@ export function initialize(container){
 }
 
 export default {
-  name: 'add-back-action-application-route',
+  name: 'back-action',
   initialize
 };

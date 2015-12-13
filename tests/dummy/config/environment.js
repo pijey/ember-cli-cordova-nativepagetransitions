@@ -27,7 +27,7 @@ module.exports = function(environment) {
         platform: "android"
       }
     },
-    nptTransition: {
+    npt: {
         defaultTransitionOptions: {
           "direction"        : "left",
           "duration"         :  400,
