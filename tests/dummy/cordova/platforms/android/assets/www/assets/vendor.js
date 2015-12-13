@@ -88244,69 +88244,77 @@ define('ember-cli-cordova/utils/redirect', ['exports', 'ember'], function (expor
     }
   };
 });
-define('ember-cli-cordova-nativepagetransitions/helpers/npt-link-to', ['exports', 'ember'], function (exports, _ember) {
-  'use strict';
+define('ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route', ['exports', 'ember'], function (exports, _ember) {
+    'use strict';
 
-  exports.nptLinkTo = nptLinkTo;
+    exports.initialize = initialize;
 
-  function nptLinkTo(params) {
-    return params;
-  }
+    function initialize(container) {
+        _ember['default'].run.next(function () {
+            var applicationRoute = container.lookupFactory('route:application');
+            if (applicationRoute && typeof applicationRoute.reopen === 'function') {
+                applicationRoute.reopen({
+                    actions: {
+                        back: function back(transitionDirection, transitionType) {
+                            this.router.back(transitionDirection, transitionType);
+                        }
+                    }
+                });
+            }
+        });
+    }
 
-  exports['default'] = _ember['default'].Helper.helper(nptLinkTo);
+    exports['default'] = {
+        name: 'add-back-action-application-route',
+        initialize: initialize
+    };
 });
-define("ember-cli-cordova-nativepagetransitions/initializers/npt-link-component", ["exports", "ember"], function (exports, _ember) {
-  "use strict";
+define('ember-cli-cordova-nativepagetransitions/initializers/cordova', ['exports', 'ember-cli-cordova-nativepagetransitions/utils/cordova-event-proxy'], function (exports, _emberCliCordovaNativepagetransitionsUtilsCordovaEventProxy) {
+    'use strict';
+
+    exports.initialize = initialize;
+
+    function initialize(container, application) {
+        var proxy = _emberCliCordovaNativepagetransitionsUtilsCordovaEventProxy['default'].create({});
+        application.register('proxy:cordova', proxy, { singleton: true, instantiate: false });
+        application.inject('route', 'cordova', 'proxy:cordova');
+    }
+
+    exports['default'] = {
+        name: 'cordova',
+        initialize: initialize
+    };
+});
+define('ember-cli-cordova-nativepagetransitions/initializers/npt-link-component', ['exports', 'ember'], function (exports, _ember) {
+  'use strict';
 
   exports.initialize = initialize;
 
-  function initialize(application) {
-    var transitionOptions = null;
-    var transitionType = null;
-    console.log(application);
-    // if(application.get("nptTransition")){
-    //  transitionOptions = application.get("nptTransition.transitionOptions");
-    //  transitionType = application.get("nptTransition.transitionType");
-    // }
-    _ember["default"].LinkComponent.reopen({
-      /**
-          Sets the `transitionOptions` attribute of the `LinkComponent`'s HTML element.
-          @property transitionOptions
-          @default null (using native-page-transition default values)
-          @public
-      **/
-      // transitionOptions: {
-      //    "direction"        : "left",
-      //      "duration"         :  400,
-      //      "slowdownfactor"   :    1,
-      //      "iosdelay"         :  -1,
-      //      "androiddelay"     :  -1,
-      //      "winphonedelay"    :  -1,
-      //      "fixedPixelsTop"   :    0,
-      //      "fixedPixelsBottom":   0
-      //  },
-      transitionOptions: transitionOptions,
-      /**
-          Sets the `transitionType` attribute of the `LinkComponent`'s HTML element.
-          @property transitionType
-          @default null (no transition by default)
-          @public
-      **/
-      // transitionType: "slide",
-      transitionType: transitionType
+  function initialize(container, application) {
 
+    var config = container.lookupFactory('config:environment');
+
+    container.register("npt-link:config", config.nptTransition, { instantiate: false });
+    application.inject('router', 'nptLinkConfig', 'npt-link:config');
+
+    _ember['default'].LinkComponent.reopen({
+      transitionOptions: config.nptTransition.transitionOptions,
+      transitionType: config.nptTransition.transitionType
     });
 
-    // /**
-    //  Override
-    // **/
-    // init: function(){
-    //  this._super(...arguments);
-    //    var transitionType = this.get("transitionType");
-    //    var transitionOptions = this.get("transitionOptions");
+    _ember['default'].Route.reopen({
+      activate: function activate() {
+        this.get('cordova').on('backbutton', this, this.goBack);
+      },
+      deactivate: function deactivate() {
+        this.get('cordova').off('backbutton', this, this.goBack);
+      },
+      goBack: function goBack() {
+        this.send("back", "right");
+      }
+    });
 
-    // }
-    _ember["default"].Router.reopen({
+    _ember['default'].Router.reopen({
       /**
           Sets the `transitionActivated` attribute of the `LinkComponent`'s HTML element.
           @property transitionActivated
@@ -88320,24 +88328,19 @@ define("ember-cli-cordova-nativepagetransitions/initializers/npt-link-component"
           @default false (no transition by default)
           @public
       **/
-      transitionOptions: {
-        "direction": "left",
-        "duration": 400,
-        "slowdownfactor": 1,
-        "iosdelay": -1,
-        "androiddelay": -1,
-        "winphonedelay": -1,
-        "fixedPixelsTop": 0,
-        "fixedPixelsBottom": 0
-      },
-      /**
-          Sets the `transitionType` attribute of the `LinkComponent`'s HTML element.
-          @property transitionType
-          @default null (no transition by default)
-          @public
-      **/
-      transitionType: "slide",
       routes: [],
+      /**
+        @override
+      **/
+      init: function init() {
+        // if(window.plugins !== undefined && window.plugins.nativepagetransitions !== undefined){
+        //   this.set("transitionActivated", false);
+        // }
+        // else {
+        //   console.error("NativePageTransitions plugin is not detected, did you install it ?");
+        // }
+        this._super.apply(this, arguments);
+      },
       /**
         @override
       **/
@@ -88361,19 +88364,31 @@ define("ember-cli-cordova-nativepagetransitions/initializers/npt-link-component"
       Allow to transition back to the previous url
         @public
       **/
-      back: function back() {
-        console.log("npt - routing back");
-        var transitionType = this.get("transitionType");
-        if (transitionType !== null && transitionType !== null) {
-          //Update router routes to pop the last two routes
-
+      back: function back(transitionDirection, transitionType) {
+        if (this.get("routes").length > 1) {
+          var backRoute = this.get("routes")[this.get("routes").length - 2];
+          console.log("npt - routing back to " + backRoute);
+          transitionType = transitionType === undefined ? "slide" : transitionType;
+          transitionDirection = transitionDirection === undefined ? "right" : transitionDirection;
+          var options = {
+            href: backRoute,
+            "direction": transitionDirection
+          };
+          var that = this;
           //Transition to the previous page
-          this.get("router");
-        }
-        //Transition to the previous page
+          window.plugins.nativepagetransitions.slide(options, function (msg) {
+            console.log("success: " + msg);
+          }, // called when the animation has finished
+          function (msg) {
+            alert("error: " + msg);
+          } // called in case you pass in weird values
+          );
+          //Remove the last route from the route history
+          that.get("routes").pop();
+          that.get("routes").pop();
 
-        //Remove the last two routes from the route history
-        this.get("routes").pop();
+          history.back();
+        }
       },
       _doTransition: function _doTransition(routeName, models, queryParams) {
         console.log("npt - routing transitionTo " + JSON.stringify(routeName));
@@ -88387,84 +88402,54 @@ define("ember-cli-cordova-nativepagetransitions/initializers/npt-link-component"
           args.push({ queryParams: queryParams });
 
           var url = this.generate.apply(this, args);
-          console.log("npt - Transition url " + url);
-          console.log("npt - Transition options " + JSON.stringify(this.get("transitionOptions")));
+          console.log("npt - Transition ul " + url);
+          console.log("npt - Transition type " + this.get("nptLinkConfig.transitionType"));
+          console.log("npt - Transition options " + JSON.stringify(this.get("nptLinkConfig.transitionOptions")));
           // Do the transition
-          window.plugins.nativepagetransitions.slide({
-            options: this.get("transitionOptions"),
-            "href": url
-          });
+          if (this.get("nptLinkConfig.transitionType") === "slide") {
+            window.plugins.nativepagetransitions.slide({
+              options: this.get("nptLinkConfig.transitionOptions"),
+              "href": url
+            });
+          } else if (this.get("nptLinkConfig.transitionType") === "flip") {
+            window.plugins.nativepagetransitions.flip({
+              options: this.get("nptLinkConfig.transitionOptions"),
+              "href": url
+            });
+          }
         }
         this._super(routeName, models, queryParams);
       }
     });
   }
 
-  exports["default"] = {
+  exports['default'] = {
     name: 'npt-link-component',
     initialize: initialize
   };
 });
-define('ember-cli-cordova-nativepagetransitions/mixins/transition-to-listener', ['exports', 'ember'], function (exports, _ember) {
+define('ember-cli-cordova-nativepagetransitions/utils/cordova-event-proxy', ['exports', 'ember'], function (exports, _ember) {
   'use strict';
 
-  exports['default'] = _ember['default'].Mixin.create({
-    routing: _ember['default'].inject.service(),
+  exports['default'] = _ember['default'].Object.extend(_ember['default'].Evented, {
+    cordovaEvents: ['backbutton'],
 
-    setupTransitionToListener: function setupTransitionToListener() {
-      var route = this;
-      route.get('routing').on('transitionTo', function (args) {
-        route.transitionTo.apply(route, args);
-      });
-    }
-  });
-});
-define('ember-cli-cordova-nativepagetransitions/routes/transition-to-listener', ['exports', 'ember', 'ember-cli-cordova-nativepagetransitions/mixins/transition-to-listener'], function (exports, _ember, _emberCliCordovaNativepagetransitionsMixinsTransitionToListener) {
-  'use strict';
-
-  exports['default'] = _ember['default'].Route.extend(_emberCliCordovaNativepagetransitionsMixinsTransitionToListener['default'], {
     init: function init() {
-      this._super.apply(this, arguments);
-      this.setupTransitionToListener();
+      document.addEventListener("deviceready", _ember['default'].run.bind(this, this.setupEventListeners), false);
+    },
+
+    setupEventListeners: function setupEventListeners() {
+      var proxy = this;
+      proxy.get('cordovaEvents').forEach(function (eventName) {
+        document.addEventListener(eventName, _ember['default'].run.bind(proxy, proxy.handleEventListener), false);
+      });
+    },
+
+    handleEventListener: function handleEventListener(event) {
+      this.trigger(event.type, event);
+      return true;
     }
   });
-});
-define("ember-cli-cordova-nativepagetransitions/services/routing", ["exports", "ember"], function (exports, _ember) {
-	"use strict";
-
-	exports["default"] = _ember["default"].Service.extend(_ember["default"].Evented, {
-		transitionType: null,
-		transitionOptions: null,
-		back: function back() {
-			console.log("npt - routing back");
-			var transitionType = this.get("transitionType");
-			if (transitionType !== null && transitionType !== null) {
-				//Update router routes to pop the last two routes
-
-				//Transition to the previous page
-				this.get("router");
-			}
-		},
-		// transitionTo: function(...args) {
-		transitionTo: function transitionTo(routeName, models, queryParams, shouldReplace) {
-			console.log(this.get("transitionType"));
-			console.log("npt - routing transitionTo " + JSON.stringify(routeName));
-			if (this.get("transitionType") !== null) {
-				//Generate the url
-				var url = this.generateURL(routeName, models, queryParams);
-				console.log("npt - Transition url " + url);
-				console.log("npt - Transition options " + JSON.stringify(this.get("transitionOptions")));
-				//Do the transition
-				// window.plugins.nativepagetransitions.slide({
-				//     options: that.get("transitionOptions"),
-				//     "href" : url
-				// });
-			} else {
-					// this._super(routeName, models, queryParams, shouldReplace);
-				}
-			this.trigger('transitionTo', routeName, models, queryParams, shouldReplace);
-		}
-	});
 });
 define('ember-cli-cordova-nativepagetransitions', ['ember-cli-cordova-nativepagetransitions/index', 'ember', 'exports'], function(__index__, __Ember__, __exports__) {
   'use strict';

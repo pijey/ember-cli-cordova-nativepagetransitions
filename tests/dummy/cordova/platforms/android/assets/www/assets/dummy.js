@@ -34,17 +34,32 @@ define('dummy/components/cdv-nav-bar', ['exports', 'ember'], function (exports, 
     tagName: 'header'
   });
 });
+define("dummy/controllers/application", ["exports", "ember"], function (exports, _ember) {
+	exports["default"] = _ember["default"].Controller.extend({
+		aboutTransitionOptions: {
+			"direction": "right", // 'left|right|up|down', default 'right' (Android currently only supports left and right)
+			"duration": 600 }
+	});
+});
+// in milliseconds (ms), default 400
 define('dummy/controllers/array', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
 define('dummy/controllers/object', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
-define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/helpers/npt-link-to.jshint', ['exports'], function (exports) {
-  QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/helpers');
-  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/helpers/npt-link-to.js should pass jshint', function (assert) {
+define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route.jshint', ['exports'], function (exports) {
+  QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/initializers');
+  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/helpers/npt-link-to.js should pass jshint.');
+    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route.js should pass jshint.');
+  });
+});
+define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/initializers/cordova.jshint', ['exports'], function (exports) {
+  QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/initializers');
+  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/initializers/cordova.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/initializers/cordova.js should pass jshint.');
   });
 });
 define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/initializers/npt-link-component.jshint', ['exports'], function (exports) {
@@ -54,38 +69,24 @@ define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-co
     assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/initializers/npt-link-component.js should pass jshint.');
   });
 });
-define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/mixins/transition-to-listener.jshint', ['exports'], function (exports) {
-  QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/mixins');
-  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/mixins/transition-to-listener.js should pass jshint', function (assert) {
+define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/utils/cordova-event-proxy.jshint', ['exports'], function (exports) {
+  QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/utils');
+  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/utils/cordova-event-proxy.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/mixins/transition-to-listener.js should pass jshint.');
+    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/utils/cordova-event-proxy.js should pass jshint.');
   });
 });
-define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/routes/transition-to-listener.jshint', ['exports'], function (exports) {
-  QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/routes');
-  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/routes/transition-to-listener.js should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/routes/transition-to-listener.js should pass jshint.');
-  });
-});
-define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/services/routing.jshint', ['exports'], function (exports) {
-  QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/services');
-  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/services/routing.js should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/services/routing.js should pass jshint.');
-  });
-});
-define('dummy/helpers/npt-link-to', ['exports', 'ember-cli-cordova-nativepagetransitions/helpers/npt-link-to'], function (exports, _emberCliCordovaNativepagetransitionsHelpersNptLinkTo) {
+define('dummy/initializers/add-back-action-application-route', ['exports', 'ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route'], function (exports, _emberCliCordovaNativepagetransitionsInitializersAddBackActionApplicationRoute) {
   Object.defineProperty(exports, 'default', {
     enumerable: true,
     get: function get() {
-      return _emberCliCordovaNativepagetransitionsHelpersNptLinkTo['default'];
+      return _emberCliCordovaNativepagetransitionsInitializersAddBackActionApplicationRoute['default'];
     }
   });
-  Object.defineProperty(exports, 'nptLinkTo', {
+  Object.defineProperty(exports, 'initialize', {
     enumerable: true,
     get: function get() {
-      return _emberCliCordovaNativepagetransitionsHelpersNptLinkTo.nptLinkTo;
+      return _emberCliCordovaNativepagetransitionsInitializersAddBackActionApplicationRoute.initialize;
     }
   });
 });
@@ -94,6 +95,20 @@ define('dummy/initializers/app-version', ['exports', 'ember-cli-app-version/init
     name: 'App Version',
     initialize: (0, _emberCliAppVersionInitializerFactory['default'])(_dummyConfigEnvironment['default'].APP.name, _dummyConfigEnvironment['default'].APP.version)
   };
+});
+define('dummy/initializers/cordova', ['exports', 'ember-cli-cordova-nativepagetransitions/initializers/cordova'], function (exports, _emberCliCordovaNativepagetransitionsInitializersCordova) {
+  Object.defineProperty(exports, 'default', {
+    enumerable: true,
+    get: function get() {
+      return _emberCliCordovaNativepagetransitionsInitializersCordova['default'];
+    }
+  });
+  Object.defineProperty(exports, 'initialize', {
+    enumerable: true,
+    get: function get() {
+      return _emberCliCordovaNativepagetransitionsInitializersCordova.initialize;
+    }
+  });
 });
 define('dummy/initializers/export-application-global', ['exports', 'ember', 'dummy/config/environment'], function (exports, _ember, _dummyConfigEnvironment) {
   exports.initialize = initialize;
@@ -193,22 +208,6 @@ define("dummy/routes/page-2", ["exports", "ember"], function (exports, _ember) {
 define("dummy/routes/page-3", ["exports", "ember"], function (exports, _ember) {
   exports["default"] = _ember["default"].Route.extend({});
 });
-define('dummy/routes/transition-to-listener', ['exports', 'ember-cli-cordova-nativepagetransitions/routes/transition-to-listener'], function (exports, _emberCliCordovaNativepagetransitionsRoutesTransitionToListener) {
-  Object.defineProperty(exports, 'default', {
-    enumerable: true,
-    get: function get() {
-      return _emberCliCordovaNativepagetransitionsRoutesTransitionToListener['default'];
-    }
-  });
-});
-define('dummy/services/routing', ['exports', 'ember-cli-cordova-nativepagetransitions/services/routing'], function (exports, _emberCliCordovaNativepagetransitionsServicesRouting) {
-  Object.defineProperty(exports, 'default', {
-    enumerable: true,
-    get: function get() {
-      return _emberCliCordovaNativepagetransitionsServicesRouting['default'];
-    }
-  });
-});
 define("dummy/templates/about", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     return {
@@ -265,7 +264,7 @@ define("dummy/templates/application", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 9,
+            "line": 10,
             "column": 0
           }
         },
@@ -279,6 +278,13 @@ define("dummy/templates/application", ["exports"], function (exports) {
         var el1 = dom.createElement("h2");
         dom.setAttribute(el1, "id", "title");
         var el2 = dom.createTextNode("Welcome to Ember");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("a");
+        dom.setAttribute(el1, "href", "#");
+        var el2 = dom.createTextNode("Back");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
@@ -321,15 +327,17 @@ define("dummy/templates/application", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [2]);
-        var morphs = new Array(5);
-        morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]), 0, 0);
-        morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]), 0, 0);
-        morphs[2] = dom.createMorphAt(dom.childAt(element0, [5]), 0, 0);
-        morphs[3] = dom.createMorphAt(dom.childAt(element0, [7]), 0, 0);
-        morphs[4] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+        var element1 = dom.childAt(fragment, [4]);
+        var morphs = new Array(6);
+        morphs[0] = dom.createElementMorph(element0);
+        morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
+        morphs[2] = dom.createMorphAt(dom.childAt(element1, [3]), 0, 0);
+        morphs[3] = dom.createMorphAt(dom.childAt(element1, [5]), 0, 0);
+        morphs[4] = dom.createMorphAt(dom.childAt(element1, [7]), 0, 0);
+        morphs[5] = dom.createMorphAt(fragment, 6, 6, contextualElement);
         return morphs;
       },
-      statements: [["inline", "link-to", ["About", "about"], [], ["loc", [null, [3, 5], [3, 32]]]], ["inline", "link-to", ["Page 1", "page-1"], [], ["loc", [null, [4, 5], [4, 34]]]], ["inline", "link-to", ["Page 2", "page-2"], [], ["loc", [null, [5, 5], [5, 34]]]], ["inline", "link-to", ["Page 3", "page-3"], [], ["loc", [null, [6, 5], [6, 34]]]], ["content", "outlet", ["loc", [null, [8, 0], [8, 10]]]]],
+      statements: [["element", "action", ["back"], [], ["loc", [null, [2, 12], [2, 29]]]], ["inline", "link-to", ["About", "about"], ["transitionType", "flip", "transitionOptions", ["subexpr", "@mut", [["get", "aboutTransitionOptions", ["loc", [null, [4, 71], [4, 93]]]]], [], []]], ["loc", [null, [4, 5], [4, 95]]]], ["inline", "link-to", ["Page 1", "page-1"], [], ["loc", [null, [5, 5], [5, 34]]]], ["inline", "link-to", ["Page 2", "page-2"], [], ["loc", [null, [6, 5], [6, 34]]]], ["inline", "link-to", ["Page 3", "page-3"], [], ["loc", [null, [7, 5], [7, 34]]]], ["content", "outlet", ["loc", [null, [9, 0], [9, 10]]]]],
       locals: [],
       templates: []
     };
@@ -672,7 +680,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 2,
+            "line": 4,
             "column": 0
           }
         },
@@ -683,6 +691,13 @@ define("dummy/templates/index", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("a");
+        dom.setAttribute(el1, "href", "#");
+        var el2 = dom.createTextNode("Back");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("h4");
         var el2 = dom.createTextNode("Accueil");
         dom.appendChild(el1, el2);
@@ -691,10 +706,13 @@ define("dummy/templates/index", ["exports"], function (exports) {
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() {
-        return [];
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0]);
+        var morphs = new Array(1);
+        morphs[0] = dom.createElementMorph(element0);
+        return morphs;
       },
-      statements: [],
+      statements: [["element", "action", ["back"], [], ["loc", [null, [1, 12], [1, 29]]]]],
       locals: [],
       templates: []
     };
@@ -712,7 +730,7 @@ define("dummy/templates/page-1", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 2,
+            "line": 4,
             "column": 230
           }
         },
@@ -723,6 +741,13 @@ define("dummy/templates/page-1", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("a");
+        dom.setAttribute(el1, "href", "#");
+        var el2 = dom.createTextNode("Back");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("h4");
         var el2 = dom.createTextNode("Page 1");
         dom.appendChild(el1, el2);
@@ -735,10 +760,13 @@ define("dummy/templates/page-1", ["exports"], function (exports) {
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() {
-        return [];
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [0]);
+        var morphs = new Array(1);
+        morphs[0] = dom.createElementMorph(element0);
+        return morphs;
       },
-      statements: [],
+      statements: [["element", "action", ["back"], [], ["loc", [null, [1, 12], [1, 29]]]]],
       locals: [],
       templates: []
     };
@@ -832,14 +860,6 @@ define("dummy/templates/page-3", ["exports"], function (exports) {
     };
   })());
 });
-define('dummy/templates/transition-to-listener', ['exports', 'ember-cli-cordova-nativepagetransitions/templates/transition-to-listener'], function (exports, _emberCliCordovaNativepagetransitionsTemplatesTransitionToListener) {
-  Object.defineProperty(exports, 'default', {
-    enumerable: true,
-    get: function get() {
-      return _emberCliCordovaNativepagetransitionsTemplatesTransitionToListener['default'];
-    }
-  });
-});
 /* jshint ignore:start */
 
 /* jshint ignore:end */
@@ -866,7 +886,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("dummy/app")["default"].create({"nptTransition":{"transitionOptions":{"direction":"left","duration":400,"slowdownfactor":1,"iosdelay":-1,"androiddelay":-1,"winphonedelay":-1,"fixedPixelsTop":0,"fixedPixelsBottom":0},"transitionType":"slide"},"name":"ember-cli-cordova-nativepagetransitions","version":"0.0.0+75d9563b"});
+  require("dummy/app")["default"].create({"name":"ember-cli-cordova-nativepagetransitions","version":"0.0.0+bc4c8359"});
 }
 
 /* jshint ignore:end */

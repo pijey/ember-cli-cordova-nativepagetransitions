@@ -7,6 +7,15 @@ define('dummy/tests/app.jshint', ['exports'], function (exports) {
     assert.ok(true, 'app.js should pass jshint.');
   });
 });
+define('dummy/tests/controllers/application.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - controllers');
+  QUnit.test('controllers/application.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'controllers/application.js should pass jshint.');
+  });
+});
 define('dummy/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = destroyApp;
 
@@ -186,6 +195,66 @@ define('dummy/tests/unit/helpers/npt-link-to-test.jshint', ['exports'], function
   QUnit.test('unit/helpers/npt-link-to-test.js should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/helpers/npt-link-to-test.js should pass jshint.');
+  });
+});
+define('dummy/tests/unit/initializers/add-back-action-application-route-test', ['exports', 'ember', 'dummy/initializers/add-back-action-application-route', 'qunit'], function (exports, _ember, _dummyInitializersAddBackActionApplicationRoute, _qunit) {
+
+  var application = undefined;
+
+  (0, _qunit.module)('Unit | Initializer | add back action application route', {
+    beforeEach: function beforeEach() {
+      _ember['default'].run(function () {
+        application = _ember['default'].Application.create();
+        application.deferReadiness();
+      });
+    }
+  });
+
+  // Replace this with your real tests.
+  (0, _qunit.test)('it works', function (assert) {
+    _dummyInitializersAddBackActionApplicationRoute['default'].initialize(application);
+
+    // you would normally confirm the results of the initializer here
+    assert.ok(true);
+  });
+});
+define('dummy/tests/unit/initializers/add-back-action-application-route-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/initializers');
+  QUnit.test('unit/initializers/add-back-action-application-route-test.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/initializers/add-back-action-application-route-test.js should pass jshint.');
+  });
+});
+define('dummy/tests/unit/initializers/cordova-test', ['exports', 'ember', 'dummy/initializers/cordova', 'qunit'], function (exports, _ember, _dummyInitializersCordova, _qunit) {
+
+  var application = undefined;
+
+  (0, _qunit.module)('Unit | Initializer | cordova', {
+    beforeEach: function beforeEach() {
+      _ember['default'].run(function () {
+        application = _ember['default'].Application.create();
+        application.deferReadiness();
+      });
+    }
+  });
+
+  // Replace this with your real tests.
+  (0, _qunit.test)('it works', function (assert) {
+    _dummyInitializersCordova['default'].initialize(application);
+
+    // you would normally confirm the results of the initializer here
+    assert.ok(true);
+  });
+});
+define('dummy/tests/unit/initializers/cordova-test.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint - unit/initializers');
+  QUnit.test('unit/initializers/cordova-test.js should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/initializers/cordova-test.js should pass jshint.');
   });
 });
 define('dummy/tests/unit/initializers/npt-link-component-test', ['exports', 'ember', 'dummy/initializers/npt-link-component', 'qunit'], function (exports, _ember, _dummyInitializersNptLinkComponent, _qunit) {

@@ -19,7 +19,7 @@ module.exports = function(environment) {
       
     },
     cordova: {
-      emberUrl: "http://192.168.1.15:4200",
+      emberUrl: "http://192.168.1.16:4200",
       rebuildOnChange: false,
       emulate: false,
       liveReload: {
@@ -28,17 +28,28 @@ module.exports = function(environment) {
       }
     },
     nptTransition: {
-        transitionOptions: {
+        defaultTransitionOptions: {
           "direction"        : "left",
-            "duration"         :  400,
-            "slowdownfactor"   :    1,
-            "iosdelay"         :  -1,
-            "androiddelay"     :  -1,
-            "winphonedelay"    :  -1,
-            "fixedPixelsTop"   :    0,
-            "fixedPixelsBottom":   0 
+          "duration"         :  400,
+          "slowdownfactor"   :    1,
+          "iosdelay"         :  -1,
+          "androiddelay"     :  -1,
+          "winphonedelay"    :  -1,
+          "fixedPixelsTop"   :    0,
+          "fixedPixelsBottom":   0 
         },
-        transitionType: "slide"
+        defaultTransitionType: "slide",
+        defaultBackTransitionOptions: {
+          "direction"        : "right",
+          "duration"         :  400,
+          "slowdownfactor"   :    1,
+          "iosdelay"         :  -1,
+          "androiddelay"     :  -1,
+          "winphonedelay"    :  -1,
+          "fixedPixelsTop"   :    0,
+          "fixedPixelsBottom":   0 
+        },
+        defaultBackTransitionType: "slide",
       }
   };
 
