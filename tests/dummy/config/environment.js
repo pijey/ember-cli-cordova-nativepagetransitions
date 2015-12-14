@@ -28,6 +28,7 @@ module.exports = function(environment) {
       }
     },
     npt: {
+        transitionActivated:true,
         defaultTransitionOptions: {
           "direction"        : "left",
           "duration"         :  400,

@@ -51,7 +51,7 @@ export function initialize(container, application) {
   });
 
   Ember.Router.reopen({
-    transitionActivated:true,
+    transitionActivated:config.transitionActivated,
     routes:[],
     /**
       @override
