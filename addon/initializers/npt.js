@@ -101,11 +101,10 @@ export function initialize(container, application) {
           //Remove the last two routes from the route history
           this.get("routes").pop();
           this.get("routes").pop();
-
-          //Go back
-          history.back();
         }
       }
+      //Go back
+      history.back();
     },
     /**
       @override
