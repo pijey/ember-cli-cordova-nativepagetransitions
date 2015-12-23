@@ -34,6 +34,14 @@ define('dummy/components/cdv-nav-bar', ['exports', 'ember'], function (exports, 
     tagName: 'header'
   });
 });
+define("dummy/controllers/about", ["exports", "ember"], function (exports, _ember) {
+	exports["default"] = _ember["default"].Controller.extend({
+		backTransitionOptions: {
+			"direction": "left", // 'left|right|up|down', default 'right' (Android currently only supports left and right)
+			"duration": 600 }
+	});
+});
+// in milliseconds (ms), default 400
 define("dummy/controllers/application", ["exports", "ember"], function (exports, _ember) {
 	exports["default"] = _ember["default"].Controller.extend({
 		aboutTransitionOptions: {
@@ -48,11 +56,11 @@ define('dummy/controllers/array', ['exports', 'ember'], function (exports, _embe
 define('dummy/controllers/object', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller;
 });
-define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route.jshint', ['exports'], function (exports) {
+define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/initializers/back-action.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/initializers');
-  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route.js should pass jshint', function (assert) {
+  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/initializers/back-action.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route.js should pass jshint.');
+    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/initializers/back-action.js should pass jshint.');
   });
 });
 define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/initializers/cordova.jshint', ['exports'], function (exports) {
@@ -62,11 +70,11 @@ define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-co
     assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/initializers/cordova.js should pass jshint.');
   });
 });
-define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/initializers/npt-link-component.jshint', ['exports'], function (exports) {
+define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/initializers/npt.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint - modules/ember-cli-cordova-nativepagetransitions/initializers');
-  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/initializers/npt-link-component.js should pass jshint', function (assert) {
+  QUnit.test('modules/ember-cli-cordova-nativepagetransitions/initializers/npt.js should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/initializers/npt-link-component.js should pass jshint.');
+    assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/initializers/npt.js should pass jshint.');
   });
 });
 define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-cordova-nativepagetransitions/utils/cordova-event-proxy.jshint', ['exports'], function (exports) {
@@ -76,25 +84,25 @@ define('dummy/ember-cli-cordova-nativepagetransitions/tests/modules/ember-cli-co
     assert.ok(true, 'modules/ember-cli-cordova-nativepagetransitions/utils/cordova-event-proxy.js should pass jshint.');
   });
 });
-define('dummy/initializers/add-back-action-application-route', ['exports', 'ember-cli-cordova-nativepagetransitions/initializers/add-back-action-application-route'], function (exports, _emberCliCordovaNativepagetransitionsInitializersAddBackActionApplicationRoute) {
-  Object.defineProperty(exports, 'default', {
-    enumerable: true,
-    get: function get() {
-      return _emberCliCordovaNativepagetransitionsInitializersAddBackActionApplicationRoute['default'];
-    }
-  });
-  Object.defineProperty(exports, 'initialize', {
-    enumerable: true,
-    get: function get() {
-      return _emberCliCordovaNativepagetransitionsInitializersAddBackActionApplicationRoute.initialize;
-    }
-  });
-});
 define('dummy/initializers/app-version', ['exports', 'ember-cli-app-version/initializer-factory', 'dummy/config/environment'], function (exports, _emberCliAppVersionInitializerFactory, _dummyConfigEnvironment) {
   exports['default'] = {
     name: 'App Version',
     initialize: (0, _emberCliAppVersionInitializerFactory['default'])(_dummyConfigEnvironment['default'].APP.name, _dummyConfigEnvironment['default'].APP.version)
   };
+});
+define('dummy/initializers/back-action', ['exports', 'ember-cli-cordova-nativepagetransitions/initializers/back-action'], function (exports, _emberCliCordovaNativepagetransitionsInitializersBackAction) {
+  Object.defineProperty(exports, 'default', {
+    enumerable: true,
+    get: function get() {
+      return _emberCliCordovaNativepagetransitionsInitializersBackAction['default'];
+    }
+  });
+  Object.defineProperty(exports, 'initialize', {
+    enumerable: true,
+    get: function get() {
+      return _emberCliCordovaNativepagetransitionsInitializersBackAction.initialize;
+    }
+  });
 });
 define('dummy/initializers/cordova', ['exports', 'ember-cli-cordova-nativepagetransitions/initializers/cordova'], function (exports, _emberCliCordovaNativepagetransitionsInitializersCordova) {
   Object.defineProperty(exports, 'default', {
@@ -163,17 +171,17 @@ define('dummy/initializers/in-app-livereload', ['exports', 'dummy/config/environ
   };
 });
 /* globals cordova */
-define('dummy/initializers/npt-link-component', ['exports', 'ember-cli-cordova-nativepagetransitions/initializers/npt-link-component'], function (exports, _emberCliCordovaNativepagetransitionsInitializersNptLinkComponent) {
+define('dummy/initializers/npt', ['exports', 'ember-cli-cordova-nativepagetransitions/initializers/npt'], function (exports, _emberCliCordovaNativepagetransitionsInitializersNpt) {
   Object.defineProperty(exports, 'default', {
     enumerable: true,
     get: function get() {
-      return _emberCliCordovaNativepagetransitionsInitializersNptLinkComponent['default'];
+      return _emberCliCordovaNativepagetransitionsInitializersNpt['default'];
     }
   });
   Object.defineProperty(exports, 'initialize', {
     enumerable: true,
     get: function get() {
-      return _emberCliCordovaNativepagetransitionsInitializersNptLinkComponent.initialize;
+      return _emberCliCordovaNativepagetransitionsInitializersNpt.initialize;
     }
   });
 });
@@ -220,8 +228,8 @@ define("dummy/templates/about", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 2,
-            "column": 230
+            "line": 4,
+            "column": 0
           }
         },
         "moduleName": "dummy/templates/about.hbs"
@@ -241,12 +249,24 @@ define("dummy/templates/about", ["exports"], function (exports) {
         var el2 = dom.createTextNode("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora, placeat esse quisquam, alias sunt nam facilis omnis enim veritatis maiores soluta nostrum? Iste suscipit distinctio eveniet quaerat reprehenderit odio nemo.");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("a");
+        dom.setAttribute(el1, "href", "#");
+        var el2 = dom.createTextNode("Back");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes() {
-        return [];
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var element0 = dom.childAt(fragment, [4]);
+        var morphs = new Array(1);
+        morphs[0] = dom.createElementMorph(element0);
+        return morphs;
       },
-      statements: [],
+      statements: [["element", "action", ["back", "flip", ["get", "backTransitionOptions", ["loc", [null, [3, 35], [3, 56]]]]], [], ["loc", [null, [3, 12], [3, 58]]]]],
       locals: [],
       templates: []
     };
@@ -680,7 +700,7 @@ define("dummy/templates/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 4,
+            "line": 2,
             "column": 0
           }
         },
@@ -691,13 +711,6 @@ define("dummy/templates/index", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("a");
-        dom.setAttribute(el1, "href", "#");
-        var el2 = dom.createTextNode("Back");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n\n");
-        dom.appendChild(el0, el1);
         var el1 = dom.createElement("h4");
         var el2 = dom.createTextNode("Accueil");
         dom.appendChild(el1, el2);
@@ -706,13 +719,10 @@ define("dummy/templates/index", ["exports"], function (exports) {
         dom.appendChild(el0, el1);
         return el0;
       },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [0]);
-        var morphs = new Array(1);
-        morphs[0] = dom.createElementMorph(element0);
-        return morphs;
+      buildRenderNodes: function buildRenderNodes() {
+        return [];
       },
-      statements: [["element", "action", ["back"], [], ["loc", [null, [1, 12], [1, 29]]]]],
+      statements: [],
       locals: [],
       templates: []
     };
@@ -886,7 +896,7 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("dummy/app")["default"].create({"name":"ember-cli-cordova-nativepagetransitions","version":"0.0.0+bc4c8359"});
+  require("dummy/app")["default"].create({"name":"ember-cli-cordova-nativepagetransitions","version":"0.0.0+237f7bac"});
 }
 
 /* jshint ignore:end */

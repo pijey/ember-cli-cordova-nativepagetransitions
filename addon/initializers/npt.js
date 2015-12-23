@@ -39,7 +39,9 @@ export function initialize(container, application) {
   //Back button management (Android only)
   Ember.Route.reopen({
     activate: function () {
-      this.get('cordova').on('backbutton', this, this.goBack);
+      if(!this.get('cordova').has('backbutton')){
+        this.get('cordova').on('backbutton', this, this.goBack);
+      }
     },
     deactivate: function() {
         this.get('cordova').off('backbutton', this, this.goBack);
